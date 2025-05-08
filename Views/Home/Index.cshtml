@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary fw-bold">Welcome to Harmony College</h1>
+        <p class="lead text-muted">Empowering students with knowledge, values, and vision for a brighter future.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="~/images/library.jpg" class="card-img-top" alt="Library">
+                <div class="card-body">
+                    <h5 class="card-title">Modern Library</h5>
+                    <p class="card-text">Explore thousands of books, journals, and digital resources in our state-of-the-art library.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="~/images/campus.jpg" class="card-img-top" alt="Campus">
+                <div class="card-body">
+                    <h5 class="card-title">Beautiful Campus</h5>
+                    <p class="card-text">Experience a vibrant campus life with modern infrastructure and lush greenery.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="~/images/events.jpg" class="card-img-top" alt="Events">
+                <div class="card-body">
+                    <h5 class="card-title">Events & Activities</h5>
+                    <p class="card-text">Participate in academic, cultural, and sports events that nurture holistic development.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a asp-controller="Student" asp-action="Login" class="btn btn-primary btn-lg">Student Login</a>
+    </div>
+</div>
+
+<table id="studentsTable" class="display">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $.get("@Url.Action("Login", "Student")", function (resp) {
+            var tbody = $("#studentsTable tbody");
+            tbody.empty(); // Clear existing data
+
+            resp.forEach(function (student) {
+                var row = `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.age}</td>
+                        <td>${student.gender}</td>
+                    </tr>`;
+                tbody.append(row);
+            });
+
+            $("#studentsTable").DataTable();
+        }).fail(function (err) {
+            console.error("Failed to fetch students:", err);
+        });
+    });
+</script>
+
