@@ -45,45 +45,45 @@
     </div>
 </div>
 
-<table id="studentsTable" class="display">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
+@* <table id="studentsTable" class="display"> *@
+@*     <thead> *@
+@*         <tr> *@
+@*             <th>Id</th> *@
+@*             <th>Name</th> *@
+@*             <th>Age</th> *@
+@*             <th>Gender</th> *@
 
-        </tr>
-    </thead>
-    <tbody>
+@*         </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
         
-    </tbody>
-</table>
+@*     </tbody> *@
+@* </table> *@
 
 
 
+@* @section scripts{ *@
+@* <script> *@
+@*     $(document).ready(function () { *@
+@*         $.get("@Url.Action("Login", "Student")", function (resp) { *@
+@*             var tbody = $("#studentsTable tbody"); *@
+@*             tbody.empty(); // Clear existing data *@
 
-<script>
-    $(document).ready(function () {
-        $.get("@Url.Action("Login", "Student")", function (resp) {
-            var tbody = $("#studentsTable tbody");
-            tbody.empty(); // Clear existing data
+@*             resp.forEach(function (student) { *@
+@*                 var row = ` *@
+@*                     <tr> *@
+@*                         <td>${student.id}</td> *@
+@*                         <td>${student.name}</td> *@
+@*                         <td>${student.age}</td> *@
+@*                         <td>${student.gender}</td> *@
+@*                     </tr>`; *@
+@*                 tbody.append(row); *@
+@*             }); *@
 
-            resp.forEach(function (student) {
-                var row = `
-                    <tr>
-                        <td>${student.id}</td>
-                        <td>${student.name}</td>
-                        <td>${student.age}</td>
-                        <td>${student.gender}</td>
-                    </tr>`;
-                tbody.append(row);
-            });
-
-            $("#studentsTable").DataTable();
-        }).fail(function (err) {
-            console.error("Failed to fetch students:", err);
-        });
-    });
-</script>
-
+@*             $("#studentsTable").DataTable(); *@
+@*         }).fail(function (err) { *@
+@*             console.error("Failed to fetch students:", err); *@
+@*         }); *@
+@*     }); *@
+@* </script> *@
+@* } *@

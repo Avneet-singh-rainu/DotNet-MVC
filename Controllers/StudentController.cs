@@ -11,7 +11,39 @@ namespace Test.Controllers {
             _configuration = configuration;
         }
 
-        public JsonResult Login () {
+        public IActionResult Login () {
+            // survives one request only
+            // survives only the view
+            ViewBag.name = "helloo";
+
+            // survives two requests and one redirect
+            // survives the view as well as the post request after login
+            TempData["name"] = "helloo";
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login ( StudentModel student ) {
+            // authenticate the student 
+            // if successfull authentication the redirect to home
+            var vdata = ViewBag.name;
+            var tdata = TempData["name"];
+
+
+            Console.WriteLine( vdata + ",,,,,,,,,,,,,,," );
+            Console.WriteLine( tdata + ",,,,,,,,,,,,,,," );
+
+            return RedirectToAction( "Home", "Student" );
+        }
+
+
+        public IActionResult Home () {
+            return View();
+        }
+
+
+
+        public JsonResult LoadStudents () {
             // Retrieve the connection string from the appsettings.json
             string connectionString = _configuration.GetConnectionString( "Database" );
 
@@ -48,14 +80,8 @@ namespace Test.Controllers {
                 }
             }
 
-
-            foreach (var student in students) {
-                Console.WriteLine( student );
-            }
-            // Return the students list to the view
             return Json( students );
         }
+
     }
-
-
 }

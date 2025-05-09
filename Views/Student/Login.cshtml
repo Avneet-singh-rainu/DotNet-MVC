@@ -1,1 +1,42 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@model StudentModel
+
+<div class="container mt-5">
+    @ViewBag.name
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4 class="mb-0">Student Login</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Student" asp-action="Login" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Id" class="form-label">Username</label>
+                            <input asp-for="Id" class="form-control" />
+                            <span asp-validation-for="Id" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Password</label>
+                            <input asp-for="Name" class="form-control" type="password" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted">Don't have an account? <a href="#">Register</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
